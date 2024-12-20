@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Dashboard - HRM System{% endblock %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-8">
+    <h1 class="text-3xl font-bold mb-8">{{ page_title }}</h1>
+    
+    <!-- Stats Overview -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        <!-- Attendance Summary -->
+        <div class="bg-white rounded-lg shadow p-6">
+            <h2 class="text-xl font-semibold mb-4">Attendance Overview</h2>
+            <div class="space-y-4">
+                {% for stat in attendance_summary %}
+                <div class="flex justify-between items-center">
+                    <span class="text-gray-600 capitalize">{{ stat.status }}</span>
+                    <span class="font-semibold">{{ stat.count }}</span>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Leave Statistics -->
+        <div class="bg-white rounded-lg shadow p-6">
+            <h2 class="text-xl font-semibold mb-4">Leave Requests</h2>
+            <div class="text-3xl font-bold text-blue-600">
+                {{ leave_statistics }}
+            </div>
+            <p class="text-gray-600 mt-2">Pending requests</p>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="bg-white rounded-lg shadow p-6">
+            <h2 class="text-xl font-semibold mb-4">Quick Actions</h2>
+            <div class="space-y-2">
+                <a href="{% url 'attendance_mark' %}" 
+                   class="block w-full py-2 px-4 bg-blue-600 text-white rounded hover:bg-blue-700 text-center">
+                    Mark Attendance
+                </a>
+                <a href="#" 
+                   class="block w-full py-2 px-4 bg-green-600 text-white rounded hover:bg-green-700 text-center">
+                    Apply Leave
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recent Activities -->
+    <div class="bg-white rounded-lg shadow p-6">
+        <h2 class="text-xl font-semibold mb-4">Recent Activities</h2>
+        <div class="space-y-4">
+            {% for activity in recent_activities %}
+            <div class="flex items-center justify-between py-3 border-b last:border-0">
+                <div>
+                    <p class="font-medium">{{ activity.officer }}</p>
+                    <p class="text-sm text-gray-600">{{ activity.action }}</p>
+                </div>
+                <span class="text-sm text-gray-500">
+                    {{ activity.timestamp|timesince }} ago
+                </span>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Add any dashboard-specific JavaScript here
+    document.addEventListener('DOMContentLoaded', function() {
+        // Initialize any dashboard widgets or interactivity
+    });
+</script>
+{% endblock %}

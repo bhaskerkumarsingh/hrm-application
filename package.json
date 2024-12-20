@@ -1,0 +1,13 @@
+{
+  "name": "hrm-ai-system",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "python manage.py runserver",
+    "migrate": "python manage.py migrate",
+    "makemigrations": "python manage.py makemigrations"
+  },
+  "dependencies": {
+    "tailwindcss": "^3.3.5"
+  }
+}
